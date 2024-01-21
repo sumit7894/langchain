@@ -27,7 +27,7 @@ export default function HomePage() {
       let result = await convertApi.convert('pdf', 'txt', params)
       let text = await axios.get(result.dto.Files[0].Url)
 
-      const response = await axios.post('http://localhost:3000/api/extract-info', {text:`${text.data}`})
+      const response = await axios.post('https://langchain-psi.vercel.app/api/extract-info', {text:`${text.data}`})
       setTableData(response.data);
       console.log("here is the data",response.data)
 
