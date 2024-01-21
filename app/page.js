@@ -4,12 +4,10 @@ import styles from "./page.module.css";
 import axios from 'axios';
 import ConvertApi from 'convertapi-js';
 
-
-
 export default function HomePage() {
   const [file, setFile] = useState(null);
   const [extractedInfo, setExtractedInfo] = useState(null);
-
+  const [tableData,setTableData] = useState();
   const handleFileChange = (event) => {
     setFile(event.target.files[0]);
   };
@@ -29,13 +27,9 @@ export default function HomePage() {
       let result = await convertApi.convert('pdf', 'txt', params)
       let text = await axios.get(result.dto.Files[0].Url)
 
-      //const data = await response.json();
-
-      
       const response = await axios.post('http://localhost:3000/api/extract-info', {text:`${text.data}`})
-      console.log(response.data)
-      console.log(response.data.ClaimNumber)
-     // setExtractedInfo(response.data);
+      setTableData(response.data);
+      console.log("here is the data",response.data)
 
     } catch (error) {
       console.error(error);
@@ -46,10 +40,15 @@ export default function HomePage() {
   return <>
     <div className={styles.body}>
       <div>
+      <label className={styles.fileInputLabel} htmlFor="fileInput">
+        Choose a PDF file
+      </label>
       <input
-      type="file"
-      accept=".pdf" 
-      onChange={handleFileChange} 
+        id="fileInput"
+        className={styles.fileInput}
+        type="file"
+        accept=".pdf"
+        onChange={handleFileChange}
       />
       <button
       className={styles.upload__button}
@@ -58,7 +57,24 @@ export default function HomePage() {
       Upload
       </button>
       </div>
-      {extractedInfo}
       </div>
+      <table className={styles.table}>
+      <thead>
+        <tr>
+          <th>Field</th>
+          <th>Value</th>
+        </tr>
+      </thead>
+      <tbody>
+        {tableData ? Object.entries(tableData).map(([field, value]) => (
+          <tr key={field}>
+            <td>{field}</td>
+            <td>{value}</td>
+          </tr>
+        )) : <></>}
+      </tbody>
+    </table>
     </>
+
+
 }

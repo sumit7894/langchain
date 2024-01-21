@@ -41,22 +41,3 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 
 
 
-
-    const { file } = req.body;
-
-    // Parse PDF text
-    const pdfData = await pdfParse(file.buffer);
-    const text = pdfData.text;
-
-    // Create LangChain chain
-    const chain = new Chain({ client: openai });
-
-    // Use an appropriate model and prompt for information extraction
-    const response = await chain.run(text, {
-      model: 'text-davinci-003',
-      prompt: `Extract the following information from the text in a tabular format:\n- Key information points\n- Important dates\n- Relevant names and organizations\n- Key takeaways and conclusions`,
-    });
-
-    const extractedInfo = JSON.parse(response.data.text);
-
-    res.status(200).json({ extractedInfo });
