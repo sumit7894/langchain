@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import styles from "./page.module.css";
 import axios from 'axios';
+import ConvertApi from 'convertapi-js';
 
 
 
@@ -22,23 +23,20 @@ export default function HomePage() {
       formData.append('file', file);
       const myFile = formData.get('file')
 
-     const response = await fetch('/api/extract-info', {
-        method: 'POST',
-        body: myFile,
-      }); 
-
+      let convertApi = ConvertApi.auth('CjYYyJjXuUk1tW1m')
+      let params = convertApi.createParams()
+      params.add('File', myFile);
+      let result = await convertApi.convert('pdf', 'txt', params)
+      let text = await axios.get(result.dto.Files[0].Url)
 
       //const data = await response.json();
-      //setExtractedInfo(data.extractedInfo);
 
-      console.log(myFile)
+      
+      const response = await axios.post('http://localhost:3000/api/extract-info', {text:`${text.data}`})
+      console.log(response.data)
+      console.log(response.data.ClaimNumber)
+     // setExtractedInfo(response.data);
 
-      //const myFile= formData.get('file')
-/*       await axios.post('http://localhost:3000/api/extract-info', {myFile})
-      .then(function (response) {
-        console.log(response);
-      })
- */
     } catch (error) {
       console.error(error);
       alert('Failed to extract information');
