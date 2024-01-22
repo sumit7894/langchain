@@ -1,4 +1,4 @@
-.html{
+/* .html{
   margin: 0;
   padding: 0;
   overflow-x: hidden;
@@ -28,7 +28,10 @@
     color: white;
     font-size: 2rem;
 }
+.container__body
+{
 
+}
 
 .table {
   width: 100%;
@@ -78,4 +81,78 @@
 
 .fileInputLabel:hover {
   background-color: #bdc3c7; 
+} */
+
+/* YourComponent.module.css */
+
+/* Body styles */
+.body {
+  margin: 20px;
+}
+
+/* Upload container styles */
+.uploadContainer {
+  display: flex;
+  align-items: center;
+}
+
+/* File input styles */
+.fileInputLabel {
+  margin-right: 10px;
+  font-size: 16px;
+}
+
+.file__input {
+  padding: 8px;
+  font-size: 14px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  transition: border-color 0.3s ease;
+}
+
+.upload__button {
+  padding: 10px;
+  font-size: 16px;
+  background-color: #4caf50;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+.uploadButton:hover {
+  background-color: #45a049;
+}
+
+/* Table styles */
+.table {
+  width: 100%;
+  margin-top: 20px;
+  border-collapse: collapse;
+}
+
+.table th, .table td {
+  border: 1px solid #ddd;
+  padding: 12px;
+  text-align: left;
+}
+
+.table th {
+  background-color: #4caf50;
+  color: white;
+}
+
+/* Responsive styles */
+@media (max-width: 600px) {
+  .uploadContainer {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .fileInputLabel {
+    margin-bottom: 5px;
+  }
+  
+  .fileInput, .uploadButton {
+    width: 100%;
+  }
 }

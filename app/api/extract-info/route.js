@@ -12,7 +12,7 @@ export async function POST(request,response) {
 
   let final_result = await chatModel.invoke(`Extract the following information only in a key-value JSON format. Do not write any other word except json. Below is a key.
   
-  If any key don't have a value print NotFound
+  If any key don't have a value print NotFound but do write the all key's even though value is not present keep it Not Found
 
   Policy Holder Name
   Date Of Birth
