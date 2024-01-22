@@ -1,6 +1,6 @@
 # TEXT EXTRACTER
 
-Welcome to Your Project Name! This project utilizes Long Chain for prompt-based text extraction and OpenAI for key-value pair generation. The extracted data is displayed in a table format within a Next.js app.
+Welcome to the Text Extracter! This project utilizes Long Chain for prompt-based text extraction and OpenAI for key-value pair generation. The extracted data is displayed in a table format within a Next.js app.
 
 ## Setup
 
@@ -15,9 +15,7 @@ Make sure you have the following installed:
 ### Installation
 
 1. Clone the repository:
-
-   ```bash
-   git clone https://github.com/your-username/your-project.git
+   git clone https://github.com/sumit7894/langchain.git
 
 2. cd your-project
 
